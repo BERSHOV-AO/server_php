@@ -6,7 +6,7 @@ $password = "";
 $db_name = "test_db";
 $table_name = "users";
 
-$connect = new mysqli($server_name, $user_name, $password);
+$connect = new mysqli($server_name, $user_name, $password,$db_name);
 
 if($connect->connect_error) {
     die("Connection failed: " . $connect->connect_error);
@@ -24,6 +24,9 @@ if($result->num_rows > 0) {
     echo json_encode($data);
 
 }else {
-    echo json_encode(array("message" => "list is empty"));
+    $messageArray = array();
+    $messageArray[] = array("name" => "list is empty", "tel" => 0, "time" => "0", "age" => "0");
+    echo json_encode($messageArray);
 }
+$connect->close();
 ?>
